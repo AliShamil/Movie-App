@@ -22,7 +22,8 @@ namespace Movie_App.Forms
             InitializeComponent();
         }
 
-        private async void button1_Click(object sender, EventArgs e)
+
+        private async void button_search_Click(object sender, EventArgs e)
         {
             flowLayoutPanel1.Controls.Clear();
             string search = $"{_url}&s={textBox1.Text}";
@@ -68,6 +69,12 @@ namespace Movie_App.Forms
                 }
             }
 
+        }
+
+        private void textBox1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                button_search_Click(sender, e);
         }
     }
 }

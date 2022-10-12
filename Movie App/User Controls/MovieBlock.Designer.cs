@@ -40,6 +40,7 @@
             this.lbl_genre = new System.Windows.Forms.Label();
             this.guna2Elipse1 = new Guna.UI2.WinForms.Guna2Elipse(this.components);
             this.guna2Elipse2 = new Guna.UI2.WinForms.Guna2Elipse(this.components);
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -115,6 +116,7 @@
             // lbl_name
             // 
             this.lbl_name.AutoSize = true;
+            this.lbl_name.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lbl_name.Font = new System.Drawing.Font("Monotype Corsiva", 14.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
             this.lbl_name.ForeColor = System.Drawing.Color.Snow;
             this.lbl_name.Location = new System.Drawing.Point(3, 5);
@@ -122,6 +124,7 @@
             this.lbl_name.Size = new System.Drawing.Size(54, 22);
             this.lbl_name.TabIndex = 3;
             this.lbl_name.Text = "Name";
+            this.toolTip1.SetToolTip(this.lbl_name, "Clic for more info!");
             this.lbl_name.Click += new System.EventHandler(this.MovieBlock_Click);
             this.lbl_name.MouseLeave += new System.EventHandler(this.MovieBlock_MouseLeave);
             this.lbl_name.MouseHover += new System.EventHandler(this.lbl_name_MouseHover);
@@ -188,5 +191,6 @@
         private Guna.UI2.WinForms.Guna2Elipse guna2Elipse1;
         private Guna.UI2.WinForms.Guna2Elipse guna2Elipse2;
         public MoviePoster moviePoster1;
+        private ToolTip toolTip1;
     }
 }
