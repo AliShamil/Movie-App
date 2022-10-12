@@ -17,14 +17,6 @@ namespace Movie_App.User_Controls
             InitializeComponent();
         }
 
-        private void guna2PictureBox1_MouseLeave(object sender, EventArgs e)
-        {
-            Size = new System.Drawing.Size(200, 255);
-        }
-
-        private void guna2PictureBox1_MouseHover(object sender, EventArgs e)
-        {
-            Size=new System.Drawing.Size(210, 285);
-        }
+ 
     }
 }
