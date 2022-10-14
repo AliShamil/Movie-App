@@ -15,7 +15,7 @@ namespace Movie_App.Forms
 {
     public partial class MainForm : Form
     {
-        const string _apiKey = "5aa4e11a";
+        const string _apiKey = "5f2d95b9";
         const string _url = $"http://www.omdbapi.com/?apikey={_apiKey}";
         public MainForm()
         {
@@ -27,47 +27,54 @@ namespace Movie_App.Forms
         {
             flowLayoutPanel1.Controls.Clear();
             string search = $"{_url}&s={textBox1.Text}";
-
-
+            try
+            {
             using HttpClient client = new();
             string jsonStr = await client.GetStringAsync(search);
-
-            var moviecollection = JsonSerializer.Deserialize<MovieCollection>(jsonStr);
-            if (moviecollection.Search is not null)
-            {
-
-                foreach (var item in moviecollection?.Search)
+                var moviecollection = JsonSerializer.Deserialize<MovieCollection>(jsonStr);
+                if (moviecollection.Search is not null)
                 {
-                    search =  $"{_url}&t={item.Title}";
-                    using HttpClient client2 = new();
-                    string jsonStrM = await client.GetStringAsync(search);
 
-                    var movie = JsonSerializer.Deserialize<Movie>(jsonStrM);
-                    MovieBlock movieBlock = new(movie);
-                    movieBlock.Margin = new Padding(15);
-                    flowLayoutPanel1.Controls.Add(movieBlock);
+                    foreach (var item in moviecollection?.Search)
+                    {
+                        search =  $"{_url}&t={item.Title}";
+                        using HttpClient client2 = new();
+                        string jsonStrM = await client.GetStringAsync(search);
+
+                        var movie = JsonSerializer.Deserialize<Movie>(jsonStrM);
+                        MovieBlock movieBlock = new(movie);
+                        movieBlock.Margin = new Padding(15);
+                        flowLayoutPanel1.Controls.Add(movieBlock);
+                    }
+                }
+                else
+                {
+                    try
+                    {
+                        search =  $"{_url}&t={textBox1.Text}";
+                        using HttpClient client2 = new();
+                        string jsonStrM = await client.GetStringAsync(search);
+
+                        var movie = JsonSerializer.Deserialize<Movie>(jsonStrM);
+                        MovieBlock movieBlock = new(movie);
+                        movieBlock.Margin = new Padding(15);
+                        flowLayoutPanel1.Controls.Add(movieBlock);
+
+                    }
+                    catch (Exception)
+                    {
+
+                        MessageBox.Show("Movie not found!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
                 }
             }
-            else
+            catch (Exception)
             {
-                try
-                {
-                    search =  $"{_url}&t={textBox1.Text}";
-                    using HttpClient client2 = new();
-                    string jsonStrM = await client.GetStringAsync(search);
-
-                    var movie = JsonSerializer.Deserialize<Movie>(jsonStrM);
-                    MovieBlock movieBlock = new(movie);
-                    movieBlock.Margin = new Padding(15);
-                    flowLayoutPanel1.Controls.Add(movieBlock);
-
-                }
-                catch (Exception)
-                {
-
-                    MessageBox.Show("Movie not found!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
+                MessageBox.Show("Check your key or Internet connection !", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
+
+
+
 
         }
 
